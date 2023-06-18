@@ -1,0 +1,24 @@
+CREATE TABLE Products
+(
+    ProductId INT PRIMARY KEY,
+    Name NVARCHAR(50)
+)
+
+CREATE TABLE Categories
+(
+    CategoryId INT PRIMARY KEY,
+    Name NVARCHAR(50)
+)
+
+CREATE TABLE Products_Categories
+(
+    ProductId INT,
+    CategoryId INT,
+    FOREIGN KEY (ProductId) REFERENCES Products(ProductId),
+    FOREIGN KEY (CategoryId) REFERENCES Categories(CategoryId)
+)
+
+SELECT P.Name AS 'ProductName', C.Name AS 'CategoryName'
+FROM Products P
+LEFT JOIN Products_Categories PC ON P.ProductId = PC.ProductId
+LEFT JOIN Categories C ON C.CategoryId = PC.CategoryId
